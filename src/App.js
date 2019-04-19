@@ -3,11 +3,12 @@ import { BrowserRouter, Route, Switch } from "react-router-dom";
 import configureStore from "./redux/configureStore";
 import { Provider as ReduxProvider } from "react-redux";
 
-import "bootstrap/dist/css/bootstrap.min.css";
-import "./App.css";
-
 import AppHeader from "./components/AppHeader";
 import Home from "./components/Home";
+import Login from "./components/Login";
+import NotFound from "./components/NotFound";
+import Register from "./components/Register";
+import AppFooter from "./components/AppFooter";
 
 const store = configureStore();
 
@@ -20,7 +21,11 @@ class App extends Component {
             <AppHeader />
             <Switch>
               <Route exact path="/" component={Home} />
+              <Route path="/login" component={Login} />
+              <Route path="/register" component={Register} />
+              <Route component={NotFound} />
             </Switch>
+            <AppFooter />
           </div>
         </BrowserRouter>
       </ReduxProvider>
