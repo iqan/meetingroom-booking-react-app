@@ -1,6 +1,14 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
+import { PropTypes } from "prop-types";
+import { login } from "../redux/actions/userActions";
 
-export default class Login extends Component {
+class Login extends Component {
+  user = this.props.user;
+  handleLogin = e => {
+    e.preventDefault();
+    this.props.onLogin(this.user);
+  };
   render() {
     return (
       <div className="card">
@@ -14,6 +22,7 @@ export default class Login extends Component {
               id="email"
               aria-describedby="email"
               placeholder="Enter email"
+              onChange={e => (this.user.email = e.target.value)}
             />
             <small className="form-text text-muted" />
           </div>
@@ -24,9 +33,14 @@ export default class Login extends Component {
               className="form-control"
               id="password"
               placeholder="Password"
+              onChange={e => (this.user.password = e.target.value)}
             />
           </div>
-          <button type="submit" className="btn btn-primary">
+          <button
+            type="submit"
+            className="btn btn-primary"
+            onClick={this.handleLogin}
+          >
             Login
           </button>
         </form>
@@ -34,3 +48,26 @@ export default class Login extends Component {
     );
   }
 }
+
+Login.propTypes = {
+  onLogin: PropTypes.func.isRequired
+};
+
+function mapStateToProps(state) {
+  return {
+    user: state.user
+  };
+}
+
+function mapDispatchToProp(dispatch) {
+  return {
+    onLogin: user => {
+      dispatch(login(user));
+    }
+  };
+}
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProp
+)(Login);
