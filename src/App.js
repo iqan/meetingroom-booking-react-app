@@ -3,6 +3,7 @@ import { BrowserRouter, Route, Switch } from "react-router-dom";
 import configureStore from "./redux/configureStore";
 import { Provider as ReduxProvider } from "react-redux";
 
+import "./App.css";
 import AppHeader from "./components/AppHeader";
 import Home from "./components/Home";
 import Login from "./components/Login";
@@ -17,7 +18,7 @@ class App extends Component {
     return (
       <ReduxProvider store={store}>
         <BrowserRouter>
-          <div className="App container">
+          <div className="App container px-0">
             <AppHeader />
             <Switch>
               <Route exact path="/" component={Home} />
