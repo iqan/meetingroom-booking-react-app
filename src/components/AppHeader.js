@@ -1,10 +1,10 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
-
-import {} from "../redux/actions/userActions";
+import { PropTypes } from "prop-types";
 
 export class AppHeader extends Component {
+  user = this.props.user;
   render() {
     return (
       <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -48,7 +48,9 @@ export class AppHeader extends Component {
   }
 }
 
-AppHeader.propTypes = {};
+AppHeader.propTypes = {
+  user: PropTypes.object.isRequired
+};
 
 function mapStateToProps(state) {
   return {

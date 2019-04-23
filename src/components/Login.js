@@ -4,14 +4,14 @@ import { PropTypes } from "prop-types";
 import { login } from "../redux/actions/userActions";
 
 class Login extends Component {
-  user = this.props.user;
+  user = {};
   handleLogin = e => {
     e.preventDefault();
     this.props.onLogin(this.user);
   };
   render() {
     return (
-      <div className="card">
+      <div className="d-flex flex-column">
         <h2 className="text-center my-5">Login</h2>
         <form className="align-self-center center-form mb-5">
           <div className="form-group">
@@ -36,13 +36,15 @@ class Login extends Component {
               onChange={e => (this.user.password = e.target.value)}
             />
           </div>
-          <button
-            type="submit"
-            className="btn btn-primary"
-            onClick={this.handleLogin}
-          >
-            Login
-          </button>
+          <div className="form-group">
+            <button
+              type="submit"
+              className="btn btn-primary"
+              onClick={this.handleLogin}
+            >
+              Login
+            </button>
+          </div>
         </form>
       </div>
     );
