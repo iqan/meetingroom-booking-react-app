@@ -1,7 +1,9 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { PropTypes } from "prop-types";
-import { login } from "../redux/actions/userActions";
+import axios from "axios";
+
+import { login, loginError } from "../redux/actions/userActions";
 
 class Login extends Component {
   user = {};
@@ -64,7 +66,18 @@ function mapStateToProps(state) {
 function mapDispatchToProp(dispatch) {
   return {
     onLogin: user => {
-      dispatch(login(user));
+      axios
+        .post("http://localhost:3001/users/authenticate", user)
+        .then(res => {
+          if (res.data.success) {
+            dispatch(login(res.data));
+          } else {
+            dispatch(loginError(res.data.message));
+          }
+        })
+        .catch(err => {
+          dispatch(loginError(err));
+        });
     }
   };
 }

@@ -10,9 +10,11 @@ export default function userReducer(state = initialState, action) {
     case actionTypes.DO_REGISTER:
       alert("user :" + JSON.stringify(action.user));
       return {
-        ...state,
-        user: action.user
+        ...state
       };
+    case actionTypes.LOGIN_ERROR:
+      alert("error while loggin in: " + JSON.stringify(action.error));
+      return state;
     default:
       return state;
   }
