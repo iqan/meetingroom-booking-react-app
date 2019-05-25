@@ -9,7 +9,9 @@ import Home from "./components/Home";
 import Login from "./components/Login";
 import NotFound from "./components/NotFound";
 import Register from "./components/Register";
+import Dashboard from "./components/Dashboard";
 import AppFooter from "./components/AppFooter";
+import LogOut from "./components/LogOut";
 
 const store = configureStore();
 
@@ -24,6 +26,8 @@ class App extends Component {
               <Route exact path="/" component={Home} />
               <Route path="/login" component={Login} />
               <Route path="/register" component={Register} />
+              <Route path="/dashboard" component={Dashboard} />
+              <Route path="/logout" component={LogOut} />
               <Route component={NotFound} />
             </Switch>
             <AppFooter />

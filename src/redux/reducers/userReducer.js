@@ -1,20 +1,30 @@
 import actionTypes from "../actions/actionTypes";
 
 const initialState = {
-  user: null
+  user: null,
+  token: null,
+  isLoggedIn: false,
+  error: null
 };
 
 export default function userReducer(state = initialState, action) {
   switch (action.type) {
     case actionTypes.DO_LOGIN:
     case actionTypes.DO_REGISTER:
-      alert("user :" + JSON.stringify(action.user));
       return {
-        ...state
+        ...state,
+        user: action.loginDetails.user,
+        token: action.loginDetails.token,
+        isLoggedIn: true,
+        error: null
       };
     case actionTypes.LOGIN_ERROR:
-      alert("error while loggin in: " + JSON.stringify(action.error));
-      return state;
+      return {
+        ...state,
+        error: action.error
+      };
+    case actionTypes.LOGOUT:
+      return initialState;
     default:
       return state;
   }

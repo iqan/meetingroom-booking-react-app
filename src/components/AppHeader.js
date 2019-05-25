@@ -30,18 +30,44 @@ export class AppHeader extends Component {
               </Link>
             </li>
           </ul>
-          <ul className="navbar-nav ml-auto">
-            <li className="nav-item">
-              <Link className="nav-link" to="/login">
-                Login
-              </Link>
-            </li>
-            <li className="nav-item">
-              <Link className="nav-link" to="/register">
-                Register
-              </Link>
-            </li>
-          </ul>
+          {this.props.user != null && this.props.user.isLoggedIn ? (
+            <ul className="navbar-nav">
+              <li className="nav-item">
+                <Link className="nav-link" to="/dashboard">
+                  Dashboard
+                </Link>
+              </li>
+            </ul>
+          ) : (
+            <></>
+          )}
+          {this.props.user == null || !this.props.user.isLoggedIn ? (
+            <ul className="navbar-nav ml-auto">
+              <li className="nav-item">
+                <Link className="nav-link" to="/login">
+                  Login
+                </Link>
+              </li>
+              <li className="nav-item">
+                <Link className="nav-link" to="/register">
+                  Register
+                </Link>
+              </li>
+            </ul>
+          ) : (
+            <ul className="navbar-nav ml-auto">
+              <li className="nav-item">
+                <Link className="nav-link" to="#">
+                  {this.props.user.user.email}
+                </Link>
+              </li>
+              <li className="nav-item">
+                <Link className="nav-link" to="/logout">
+                  Logout
+                </Link>
+              </li>
+            </ul>
+          )}
         </div>
       </nav>
     );

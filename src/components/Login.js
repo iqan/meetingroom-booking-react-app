@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import { Redirect } from "react-router-dom";
 import { PropTypes } from "prop-types";
 import axios from "axios";
 
@@ -7,15 +8,26 @@ import { login, loginError } from "../redux/actions/userActions";
 
 class Login extends Component {
   user = {};
+
   handleLogin = e => {
     e.preventDefault();
     this.props.onLogin(this.user);
   };
+
   render() {
-    return (
+    return this.props.user && this.props.user.token ? (
+      <Redirect to="/dashboard" />
+    ) : (
       <div className="d-flex flex-column">
         <h2 className="text-center my-5">Login</h2>
         <form className="align-self-center center-form mb-5">
+          <div className="form-group">
+            {this.props.user.error ? (
+              <p className="alert alert-danger">{this.props.user.error}</p>
+            ) : (
+              <></>
+            )}
+          </div>
           <div className="form-group">
             <label htmlFor="email">Email address</label>
             <input
